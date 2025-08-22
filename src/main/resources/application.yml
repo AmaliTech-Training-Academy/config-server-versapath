@@ -11,3 +11,12 @@ spring:
           uri: ${CONFIG_REPO_GIT_URL}
           clone-on-start: ${CLONE_ON_START}
           default-label: ${CONFIG_SERVER_GIT_DEFAULT_LABEL}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
