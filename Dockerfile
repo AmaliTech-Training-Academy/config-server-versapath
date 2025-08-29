@@ -22,10 +22,6 @@ LABEL maintainer="AmaliTech Training Academy" \
     description="Config server" \
     version="1.0"
 
-# Set default environment variables (can be overridden)
-ENV SPRING_PROFILES_ACTIVE=production
-ENV SERVER_PORT=8040
-
 # Create a non-root user
 RUN useradd -r -u 1001 -g root servicediscovery
 
@@ -36,7 +32,7 @@ COPY --from=builder --chown=servicediscovery:root /build/target/*.jar ./applicat
 
 # Configure container
 USER 1001
-EXPOSE 8040
+EXPOSE 8888
 
 # Use the standard JAR execution
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-Djava.security.egd=file:/dev/./urandom", "-jar", "application.jar"]
