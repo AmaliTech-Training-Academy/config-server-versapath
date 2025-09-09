@@ -24,6 +24,9 @@ WORKDIR /application
 # Copy the built Jar file from the builder stage
 COPY --from=builder /build/target/*-SNAPSHOT.jar app.jar
 
+# create a non-root user (Alpine / musl)
+RUN addgroup -S configserver && adduser -S -G configserver configserver
+
 # Switch to non-root user
 USER configserver
 
