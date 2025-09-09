@@ -1,6 +1,7 @@
 # Build stage: Compile the application
 FROM maven:3.9-eclipse-temurin-21 AS builder
 
+# Set the working directory inside the container
 WORKDIR /build
 
 # Copy pom.xml first for better caching
@@ -21,7 +22,7 @@ FROM bellsoft/liberica-runtime-container:jre-21-slim-musl
 WORKDIR /application
 
 # Copy the built Jar file from the builder stage
-COPY --from=builder /application/target/*-SNAPSHOT.jar app.jar
+COPY --from=builder /build/target/*-SNAPSHOT.jar app.jar
 
 # Switch to non-root user
 USER configserver
